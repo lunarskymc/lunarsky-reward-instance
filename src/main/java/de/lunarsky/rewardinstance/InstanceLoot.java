@@ -8,6 +8,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.EnchantmentStorageMeta;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
 
@@ -75,19 +76,27 @@ public class InstanceLoot implements CommandExecutor {
 
         for(int i = 0; i < Helper.randInt(2, 3); i++) {
             ItemStack book = new ItemStack(Material.ENCHANTED_BOOK);
-            book.addUnsafeEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, Helper.randInt(1, 5));
+            EnchantmentStorageMeta meta = (EnchantmentStorageMeta) book.getItemMeta();
+            meta.addStoredEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, Helper.randInt(1, 5), true);
+            book.setItemMeta(meta);
             loot.add(book);
 
             book = new ItemStack(Material.ENCHANTED_BOOK);
-            book.addUnsafeEnchantment(Enchantment.DAMAGE_ALL, Helper.randInt(2, 6));
+            meta = (EnchantmentStorageMeta) book.getItemMeta();
+            meta.addStoredEnchant(Enchantment.DAMAGE_ALL, Helper.randInt(2, 6), true);
+            book.setItemMeta(meta);
             loot.add(book);
 
             book = new ItemStack(Material.ENCHANTED_BOOK);
-            book.addUnsafeEnchantment(Enchantment.DIG_SPEED, Helper.randInt(3, 6));
+            meta = (EnchantmentStorageMeta) book.getItemMeta();
+            meta.addStoredEnchant(Enchantment.DIG_SPEED, Helper.randInt(3, 6), true);
+            book.setItemMeta(meta);
             loot.add(book);
 
             book = new ItemStack(Material.ENCHANTED_BOOK);
-            book.addUnsafeEnchantment(Enchantment.MENDING, 1);
+            meta = (EnchantmentStorageMeta) book.getItemMeta();
+            meta.addStoredEnchant(Enchantment.MENDING, 1, true);
+            book.setItemMeta(meta);
             loot.add(book);
 
             loot.add(new ItemStack(Material.DRAGON_BREATH, Helper.randInt(2, 6)));
