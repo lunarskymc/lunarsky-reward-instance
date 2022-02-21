@@ -3,6 +3,7 @@ package de.lunarsky.rewardinstance.core;
 import de.lunarsky.rewardinstance.InstanceLoot;
 import de.lunarsky.rewardinstance.InstanceManager;
 import de.lunarsky.rewardinstance.PlaceholderInstance;
+import de.lunarsky.rewardinstance.commands.CrystalCommand;
 import de.lunarsky.rewardinstance.commands.GiveRewardItemCommand;
 import de.lunarsky.rewardinstance.events.InstanceEvents;
 import de.lunarsky.rewardinstance.events.UseKeyItem;
@@ -34,6 +35,7 @@ public class RewardInstancePlugin extends JavaPlugin {
         getCommand("addsplinter").setExecutor(new AddSplinterCommand());
         getCommand("peekloot").setExecutor(new InstanceLoot());
         getCommand("guesssplinter").setExecutor(new GuessSplinterCommand());
+        getCommand("crystals").setExecutor(new CrystalCommand());
     }
 
     private void registerListeners() {

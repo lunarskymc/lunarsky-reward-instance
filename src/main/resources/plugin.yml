@@ -16,3 +16,10 @@ commands:
     descriptions: drops all the loot to review it.
   guesssplinter:
     description: 27% chance to get a splinter
+  crystals:
+    description: View how many crystals you have
+    aliases:
+      - "kristalle"
+      - "meteoritenkristalle"
+      - "meteoriten"
+      - "kristall"

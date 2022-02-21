@@ -6,6 +6,7 @@ de\lunarsky\rewardinstance\InstanceLoot.class
 de\lunarsky\rewardinstance\events\UseKeyItem.class
 de\lunarsky\rewardinstance\InstanceEnemies.class
 de\lunarsky\rewardinstance\commands\GiveRewardItemCommand.class
+de\lunarsky\rewardinstance\commands\CrystalCommand.class
 de\lunarsky\rewardinstance\core\RewardInstancePlugin.class
 de\lunarsky\rewardinstance\Playerdata.class
 de\lunarsky\rewardinstance\InstanceManager.class
