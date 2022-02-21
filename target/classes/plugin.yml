@@ -1,0 +1,16 @@
+name: LunarskyInstance
+version: 1.0
+main: de.lunarsky.rewardinstance.core.RewardInstancePlugin
+
+api-version: 1.18
+depends: [Multiverse-Core, FastAsyncWorldEdit, VoidGen, HolographicDisplays]
+softdepend: [PlaceholderAPI]
+author: treppi / plscomeback
+
+commands:
+  givekey:
+    description: gives a player the item to enter a dungeon
+  addsplinter:
+    description: adds a splinter to a player if they can hold more
+  peekloot:
+    descriptions: drops all the loot to review it.
