@@ -3,6 +3,7 @@ package de.lunarsky.rewardinstance.core;
 import de.lunarsky.rewardinstance.InstanceLoot;
 import de.lunarsky.rewardinstance.InstanceManager;
 import de.lunarsky.rewardinstance.PlaceholderInstance;
+import de.lunarsky.rewardinstance.RotatingCrystal;
 import de.lunarsky.rewardinstance.commands.CrystalCommand;
 import de.lunarsky.rewardinstance.commands.GiveRewardItemCommand;
 import de.lunarsky.rewardinstance.events.InstanceEvents;
@@ -23,6 +24,7 @@ public class RewardInstancePlugin extends JavaPlugin {
         Bukkit.getScheduler().scheduleSyncDelayedTask(this, InstanceManager::checkInstanceWorld, 20L);
         InstanceLoot.fillLoot();
         new PlaceholderInstance().register();
+        RotatingCrystal.spawn();
     }
 
     @Override
@@ -42,6 +44,7 @@ public class RewardInstancePlugin extends JavaPlugin {
         PluginManager pm = Bukkit.getPluginManager();
         pm.registerEvents(new UseKeyItem(), this);
         pm.registerEvents(new InstanceEvents(), this);
+        pm.registerEvents(new RotatingCrystal(), this);
     }
 
     public static RewardInstancePlugin getInstance() {

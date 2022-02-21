@@ -11,6 +11,7 @@ import com.sk89q.worldedit.math.BlockVector3;
 import com.sk89q.worldedit.session.ClipboardHolder;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.World;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
@@ -66,5 +67,32 @@ public class Helper {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * returns an array of locations on a circle around a point
+     * @param center        circle center M
+     * @param radius        radius r
+     * @param points        amount of points on the circle
+     * @param startangel    start angel
+     * @return              array of locations for each point on the circle
+     */
+    public static Location[] getPointsOnCircle(Location center, double radius, int points, double startangel) {
+        Location[] locations = new Location[points];
+        World w = center.getWorld();
+
+        double cy = center.getY();
+        double cx = center.getX();
+        double cz = center.getZ();
+
+        for(int i = 0; i < points; ++i) {
+            final double angle = Math.toRadians(((double) i / points) * 360d) + startangel;
+            locations[i] = new Location(w,
+                    cx + Math.cos(angle) * radius,
+                    cy,
+                    cz + Math.sin(angle) * radius
+            );
+        }
+        return locations;
     }
 }

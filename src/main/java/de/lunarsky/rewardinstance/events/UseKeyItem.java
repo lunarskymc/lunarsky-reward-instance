@@ -67,7 +67,7 @@ public class UseKeyItem implements Listener {
      * @param p     player because it checks data
      * @return      built inventory
      */
-    private Inventory getConfirmationInventory(Player p) {
+    public static Inventory getConfirmationInventory(Player p) {
         Inventory inv = Bukkit.createInventory(null, 9*3, inventoryTitle);
         int playerSplinterAmount = SplinterManager.getAmount(p);
         ItemStack gray = Helper.createSimpleIcon(Material.GRAY_STAINED_GLASS_PANE, "§0", new String[]{});

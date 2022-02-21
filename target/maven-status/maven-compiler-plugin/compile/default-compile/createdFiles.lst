@@ -4,6 +4,7 @@ de\lunarsky\rewardinstance\Instance.class
 de\lunarsky\rewardinstance\Helper.class
 de\lunarsky\rewardinstance\InstanceLoot.class
 de\lunarsky\rewardinstance\events\UseKeyItem.class
+de\lunarsky\rewardinstance\RotatingCrystal.class
 de\lunarsky\rewardinstance\InstanceEnemies.class
 de\lunarsky\rewardinstance\commands\GiveRewardItemCommand.class
 de\lunarsky\rewardinstance\commands\CrystalCommand.class

@@ -7,6 +7,9 @@ depends: [Multiverse-Core, FastAsyncWorldEdit, VoidGen, HolographicDisplays]
 softdepend: [PlaceholderAPI]
 author: treppi / plscomeback
 
+libraries:
+  - com.squareup.okhttp3:okhttp:4.9.0
+
 commands:
   givekey:
     description: gives a player the item to enter a dungeon
