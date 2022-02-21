@@ -5,7 +5,7 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 
 public class SplinterManager {
-    public static final int max = 4;
+    public static final int max = 2;
 
     /**
      * sets the amount of splinters a player has, cant be more t han max (throw IllegalArgumentException=
@@ -41,7 +41,7 @@ public class SplinterManager {
      */
     public static void clear(Player p) {
         FileConfiguration data = Playerdata.getPlayerData(p);
-        data.set("splinter", getAmount(p) - 2);
+        data.set("splinter", 0);
         Playerdata.savePlayerdata(data, p.getUniqueId().toString());
     }
 

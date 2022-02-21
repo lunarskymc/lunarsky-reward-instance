@@ -1,8 +1,12 @@
 package de.lunarsky.rewardinstance.events;
 
+import de.lunarsky.rewardinstance.Helper;
 import de.lunarsky.rewardinstance.Instance;
 import de.lunarsky.rewardinstance.InstanceLoot;
 import de.lunarsky.rewardinstance.InstanceManager;
+import de.lunarsky.rewardinstance.commands.GiveRewardItemCommand;
+import de.lunarsky.rewardinstance.core.RewardInstancePlugin;
+import de.lunarsky.rewardinstance.splinters.SplinterManager;
 import org.bukkit.Particle;
 import org.bukkit.World;
 import org.bukkit.block.Block;
@@ -17,6 +21,7 @@ import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
+import org.bukkit.event.player.PlayerFishEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 
@@ -128,6 +133,17 @@ public class InstanceEvents implements Listener {
                     }
                 }
             }
+        }
+    }
+
+    @EventHandler
+    public void onFish(PlayerFishEvent e) {
+        if(Helper.randInt(0, 1000) < 7) {
+            e.setCancelled(true);
+            e.getPlayer().getWorld().dropItem(e.getPlayer().getLocation(), GiveRewardItemCommand.getKey());
+        }
+        if(Helper.randInt(0, 1000) < 12) {
+            SplinterManager.addSplinter(e.getPlayer());
         }
     }
 }

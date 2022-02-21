@@ -26,7 +26,8 @@ public class Instance {
     private Hologram hologram;
     private ArrayList<Entity> enemies = new ArrayList<>();
     private Long fightTimestampStart;
-    private int secondsrunning, schedulerid;
+    private int secondsrunning = 0;
+    private int schedulerid;
 
     public void loadSchematic() {
         new Thread(() -> Helper.pasteSchematic(getSpawn(), schematic, true)).start();
@@ -256,5 +257,9 @@ public class Instance {
 
     public int getStage() {
         return stage;
+    }
+
+    public int timeRunning() {
+        return secondsrunning;
     }
 }
