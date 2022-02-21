@@ -14,3 +14,5 @@ commands:
     description: adds a splinter to a player if they can hold more
   peekloot:
     descriptions: drops all the loot to review it.
+  guesssplinter:
+    description: 27% chance to get a splinter

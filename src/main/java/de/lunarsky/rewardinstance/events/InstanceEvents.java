@@ -5,7 +5,6 @@ import de.lunarsky.rewardinstance.Instance;
 import de.lunarsky.rewardinstance.InstanceLoot;
 import de.lunarsky.rewardinstance.InstanceManager;
 import de.lunarsky.rewardinstance.commands.GiveRewardItemCommand;
-import de.lunarsky.rewardinstance.core.RewardInstancePlugin;
 import de.lunarsky.rewardinstance.splinters.SplinterManager;
 import org.bukkit.Particle;
 import org.bukkit.World;

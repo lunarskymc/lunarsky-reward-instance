@@ -7,6 +7,7 @@ import de.lunarsky.rewardinstance.commands.GiveRewardItemCommand;
 import de.lunarsky.rewardinstance.events.InstanceEvents;
 import de.lunarsky.rewardinstance.events.UseKeyItem;
 import de.lunarsky.rewardinstance.splinters.AddSplinterCommand;
+import de.lunarsky.rewardinstance.splinters.GuessSplinterCommand;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -32,6 +33,7 @@ public class RewardInstancePlugin extends JavaPlugin {
         getCommand("givekey").setExecutor(new GiveRewardItemCommand());
         getCommand("addsplinter").setExecutor(new AddSplinterCommand());
         getCommand("peekloot").setExecutor(new InstanceLoot());
+        getCommand("guesssplinter").setExecutor(new GuessSplinterCommand());
     }
 
     private void registerListeners() {

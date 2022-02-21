@@ -41,6 +41,7 @@ public class UseKeyItem implements Listener {
                     Bukkit.getScheduler().scheduleSyncDelayedTask(RewardInstancePlugin.getInstance(), () -> {
                         p.closeInventory();
                         p.sendMessage("§7Du hast die Splitter in den Amethyst eingesetzt!");
+                        p.getInventory().remove(GiveRewardItemCommand.getKey());
                         Bukkit.getScheduler().scheduleSyncDelayedTask(RewardInstancePlugin.getInstance(), () -> {
                             p.getWorld().spawnParticle(Particle.EXPLOSION_HUGE, p.getLocation(), 10);
                         }, 15L * 3);

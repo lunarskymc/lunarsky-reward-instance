@@ -9,5 +9,6 @@ de\lunarsky\rewardinstance\commands\GiveRewardItemCommand.class
 de\lunarsky\rewardinstance\core\RewardInstancePlugin.class
 de\lunarsky\rewardinstance\Playerdata.class
 de\lunarsky\rewardinstance\InstanceManager.class
+de\lunarsky\rewardinstance\splinters\GuessSplinterCommand.class
 de\lunarsky\rewardinstance\events\InstanceEvents.class
 de\lunarsky\rewardinstance\PlaceholderInstance.class
