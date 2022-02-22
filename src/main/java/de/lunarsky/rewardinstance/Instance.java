@@ -3,6 +3,7 @@ package de.lunarsky.rewardinstance;
 import com.gmail.filoghost.holographicdisplays.api.Hologram;
 import com.gmail.filoghost.holographicdisplays.api.HologramsAPI;
 import de.lunarsky.rewardinstance.core.RewardInstancePlugin;
+import de.lunarsky.rewardinstance.events.AttackDamager;
 import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Entity;
@@ -15,12 +16,16 @@ import org.bukkit.potion.PotionEffectType;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Objects;
+import java.util.UUID;
 
 public class Instance {
     public static final String lootInventoryName = "§3§lLoot";
     private Player p;
     private int id, stage;
     private File schematic = new File("plugins/lunarsky-instance/arena.schem");
+    private File noPortalSchem = new File("plugins/lunarsky-instance/noportals.schem");
+    private File portalSchem = new File("plugins/lunarsky-instance/portals.schem");
     private World world = Bukkit.getWorld(InstanceManager.worldname);
     private boolean chestLoot, mobsSpawned, portalsReady, failed;
     private Hologram hologram;
@@ -32,6 +37,7 @@ public class Instance {
 
     public void loadSchematic() {
         new Thread(() -> Helper.pasteSchematic(getSpawn(), schematic, true)).start();
+        new Thread(() -> Helper.pasteSchematic(getSpawn(), noPortalSchem, true)).start();
         startChestParticles();
     }
 
@@ -105,6 +111,7 @@ public class Instance {
         if(failed) return;
         p.sendTitle("§a✔", "§7Alle Gegner besiegt!", 10, 20, 15);
         p.sendMessage("§7Du hast alle Gegner besiegt. Es ist ein Hologramm mit Anweisungen erschienen.");
+        new Thread(() -> Helper.pasteSchematic(getSpawn(), portalSchem, false)).start();
 
         hologram = HologramsAPI.createHologram(RewardInstancePlugin.getInstance(), hologramLocation());
         hologram.setAllowPlaceholders(true);
@@ -132,8 +139,12 @@ public class Instance {
      * also new loot and new mobs on opening
      */
     public void nextRoom() {
+        new Thread(() -> Helper.pasteSchematic(getSpawn(), noPortalSchem, false)).start();
         stage++;
         p.teleport(getSpawn());
+        p.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 10, 3, true));
+        p.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 10, 3, true));
+        p.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 10, 10, true));
         p.spawnParticle(Particle.EXPLOSION_LARGE, p.getLocation(), 5);
         p.playSound(p.getLocation(), Sound.ENTITY_ENDERMAN_TELEPORT, 1, 0);
         p.sendMessage("§7Du hast den nächsten Raum betreten.");
@@ -143,6 +154,31 @@ public class Instance {
         hologram.delete();
         Bukkit.getScheduler().cancelTask(schedulerid);
         startChestParticles();
+    }
+
+    /**
+     * creates a circular damage attack and displays it, the damage is dealt within AttackDamager (a Listener)
+     * @param loc       location
+     * @param size      size
+     * @param time      time in seconds to last
+     */
+    public void circularDamageAttack(Location loc, int size, int time) {
+        ArrayList<Location> locations = Helper.getCircularShape(loc, size);
+        World world = locations.get(0).getWorld();
+        int schid = Bukkit.getScheduler().scheduleSyncRepeatingTask(RewardInstancePlugin.getInstance(), () -> {
+            new Thread(() -> {
+                locations.forEach(particleLocation -> {
+                    Color color = Color.fromRGB(191, 46, 46);
+                    p.spawnParticle(Particle.REDSTONE, particleLocation, 0, new Particle.DustOptions(color, 3f));
+                });
+            }).start();
+        }, 5L, 5L);
+        String uuid = UUID.randomUUID().toString();
+        AttackDamager.addInfo(new CircularDamageInfo(uuid, loc, size, id));
+        Bukkit.getScheduler().scheduleSyncDelayedTask(RewardInstancePlugin.getInstance(), () -> {
+            Bukkit.getScheduler().cancelTask(schid);
+            AttackDamager.removeInfo(uuid);
+        }, time * 20L);
     }
 
     /**
@@ -176,16 +212,21 @@ public class Instance {
             schedulerid = Bukkit.getScheduler().scheduleSyncRepeatingTask(RewardInstancePlugin.getInstance(), () -> {
                 secondsrunning++;
                 enemies.stream()
+                        .filter(Objects::nonNull)
                         .filter(e -> !e.isDead())
                         .filter(e -> (!(e instanceof Vex) && e.getLocation().getY() < 120) || e.getLocation().distance(getLootBlock().getLocation()) > 25)
                         .forEach(e -> {
                             enemies.remove(e);
                             e.remove();
                         });
+                /* //todo: make those working
+                if(secondsrunning == 5) circularDamageAttack(new Location(world, id * 3000 + 2, 120, id * 3000 - 2), 4, 20);
+                if(secondsrunning == 5 && stage > 1) circularDamageAttack(new Location(world, id * 3000 - 7, 120, id * 3000 + 6), 4, 60);
+                if(secondsrunning == 19 && stage > 2) circularDamageAttack(new Location(world, id * 3000 + 4, 120, id * 3000 + 10), 4, 60);*/
                 if(enemies.stream().filter(e -> !e.isDead()).count() == 0 && secondsrunning >= 10) {
                     onAllEnemiesKilled();
                 }
-            }, 20L, 0L);
+            }, 0L, 20L);
         }
     }
 

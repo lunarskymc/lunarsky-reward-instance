@@ -16,7 +16,9 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Locale;
 import java.util.Random;
 
 public class Helper {
@@ -98,6 +100,23 @@ public class Helper {
                     cy,
                     cz + Math.sin(angle) * radius
             );
+        }
+        return locations;
+    }
+
+    /**
+     * returns a filled circle with locations
+     * @param center        center
+     * @param radius        radius
+     * @return              ArrayList of Locations, starting in the middle then going out
+     */
+    public static ArrayList<Location> getCircularShape(Location center, double radius) {
+        ArrayList<Location> locations = new ArrayList<>();
+        for(double i = 0.1; i < radius; i += 0.3) {
+            Location[] points = getPointsOnCircle(center, i, (int) (i * 15), 0);
+            for(Location l : points) {
+                locations.add(l);
+            }
         }
         return locations;
     }

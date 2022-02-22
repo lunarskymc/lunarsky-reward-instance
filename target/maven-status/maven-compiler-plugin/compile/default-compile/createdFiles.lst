@@ -1,4 +1,5 @@
 de\lunarsky\rewardinstance\splinters\SplinterManager.class
+de\lunarsky\rewardinstance\CircularDamageInfo.class
 de\lunarsky\rewardinstance\splinters\AddSplinterCommand.class
 de\lunarsky\rewardinstance\Instance.class
 de\lunarsky\rewardinstance\Helper.class
@@ -12,5 +13,6 @@ de\lunarsky\rewardinstance\core\RewardInstancePlugin.class
 de\lunarsky\rewardinstance\Playerdata.class
 de\lunarsky\rewardinstance\InstanceManager.class
 de\lunarsky\rewardinstance\splinters\GuessSplinterCommand.class
+de\lunarsky\rewardinstance\events\AttackDamager.class
 de\lunarsky\rewardinstance\events\InstanceEvents.class
 de\lunarsky\rewardinstance\PlaceholderInstance.class

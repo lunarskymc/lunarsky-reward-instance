@@ -30,6 +30,7 @@ public class RotatingCrystal implements Listener {
     @EventHandler
     public void onClick(PlayerInteractEvent e) {
         if(e.hasBlock()) {
+            if(!e.getPlayer().getWorld().getName().equalsIgnoreCase("skyworld")) return;
             if(e.getClickedBlock().getLocation().distance(loc) <= 1.1) {
                 Player p = e.getPlayer();
                 p.openInventory(UseKeyItem.getConfirmationInventory(p));

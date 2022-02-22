@@ -6,6 +6,7 @@ import de.lunarsky.rewardinstance.PlaceholderInstance;
 import de.lunarsky.rewardinstance.RotatingCrystal;
 import de.lunarsky.rewardinstance.commands.CrystalCommand;
 import de.lunarsky.rewardinstance.commands.GiveRewardItemCommand;
+import de.lunarsky.rewardinstance.events.AttackDamager;
 import de.lunarsky.rewardinstance.events.InstanceEvents;
 import de.lunarsky.rewardinstance.events.UseKeyItem;
 import de.lunarsky.rewardinstance.splinters.AddSplinterCommand;
@@ -25,6 +26,7 @@ public class RewardInstancePlugin extends JavaPlugin {
         InstanceLoot.fillLoot();
         new PlaceholderInstance().register();
         RotatingCrystal.spawn();
+        AttackDamager.startTicking();
     }
 
     @Override
@@ -45,6 +47,7 @@ public class RewardInstancePlugin extends JavaPlugin {
         pm.registerEvents(new UseKeyItem(), this);
         pm.registerEvents(new InstanceEvents(), this);
         pm.registerEvents(new RotatingCrystal(), this);
+        pm.registerEvents(new AttackDamager(), this);
     }
 
     public static RewardInstancePlugin getInstance() {
