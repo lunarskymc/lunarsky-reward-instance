@@ -18,14 +18,14 @@ public class InstanceLoot implements CommandExecutor {
     private static ArrayList<ItemStack> loot;
 
     public static void fillLoot() {
-        loot = new ArrayList<ItemStack>();
-        for(int i = 0; i < Helper.randInt(2, 5); i++) {
+        loot = new ArrayList<>();
+        for(int i = 0; i < Helper.randInt(2, 3); i++) {
             ItemStack pick = new ItemStack(Material.DIAMOND_PICKAXE);
             ItemMeta meta = pick.getItemMeta();
             pick.addUnsafeEnchantment(Enchantment.DURABILITY, Helper.randInt(1, 4));
             pick.addUnsafeEnchantment(Enchantment.LOOT_BONUS_BLOCKS, Helper.randInt(1, 2));
             pick.addUnsafeEnchantment(Enchantment.DIG_SPEED, Helper.randInt(1, 6));
-            if(Helper.randInt(0, 10) <= 2) pick.addUnsafeEnchantment(Enchantment.MENDING, 1);
+            if(Helper.randInt(0, 30) <= 2) pick.addUnsafeEnchantment(Enchantment.MENDING, 1);
             loot.add(pick);
         }
 
@@ -51,13 +51,13 @@ public class InstanceLoot implements CommandExecutor {
             loot.add(axe);
         }
 
-        for(int i = 0; i < Helper.randInt(2, 5); i++) {
+        for(int i = 0; i < Helper.randInt(2, 3); i++) {
             ItemStack axe = new ItemStack(Material.DIAMOND_AXE);
             ItemMeta meta = axe.getItemMeta();
             axe.addUnsafeEnchantment(Enchantment.DURABILITY, Helper.randInt(1, 4));
             axe.addUnsafeEnchantment(Enchantment.LOOT_BONUS_BLOCKS, Helper.randInt(1, 2));
             axe.addUnsafeEnchantment(Enchantment.DIG_SPEED, Helper.randInt(1, 6));
-            if(Helper.randInt(0, 10) <= 2) axe.addUnsafeEnchantment(Enchantment.MENDING, 1);
+            if(Helper.randInt(0, 30) <= 2) axe.addUnsafeEnchantment(Enchantment.MENDING, 1);
             loot.add(axe);
         }
 

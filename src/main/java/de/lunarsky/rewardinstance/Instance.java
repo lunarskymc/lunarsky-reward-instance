@@ -182,7 +182,7 @@ public class Instance {
                             enemies.remove(e);
                             e.remove();
                         });
-                if(enemies.stream().filter(e -> !e.isDead()).count() == 0) {
+                if(enemies.stream().filter(e -> !e.isDead()).count() == 0 && secondsrunning >= 10) {
                     onAllEnemiesKilled();
                 }
             }, 20L, 0L);
