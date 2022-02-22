@@ -9,9 +9,8 @@ import com.sk89q.worldedit.function.operation.Operation;
 import com.sk89q.worldedit.function.operation.Operations;
 import com.sk89q.worldedit.math.BlockVector3;
 import com.sk89q.worldedit.session.ClipboardHolder;
-import org.bukkit.Location;
-import org.bukkit.Material;
-import org.bukkit.World;
+import org.bukkit.*;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
@@ -68,6 +67,13 @@ public class Helper {
             e.printStackTrace();
         }
     }
+    public static void displayParticleTwirl(Player p, Location loc, double angel, Color color) {
+        Location[] points = Helper.getPointsOnCircle(loc, 1, 20, angel);
+        for (Location pointlocation : points) {
+            p.spawnParticle(Particle.REDSTONE, pointlocation, 0, new Particle.DustOptions(color, 1f));
+        }
+    }
+
 
     /**
      * returns an array of locations on a circle around a point

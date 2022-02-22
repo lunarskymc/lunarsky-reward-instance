@@ -27,10 +27,12 @@ public class Instance {
     private ArrayList<Entity> enemies = new ArrayList<>();
     private Long fightTimestampStart;
     private int secondsrunning = 0;
-    private int schedulerid;
+    private int schedulerid, chestparticlescheduler;
+    private int angel = 0;
 
     public void loadSchematic() {
         new Thread(() -> Helper.pasteSchematic(getSpawn(), schematic, true)).start();
+        startChestParticles();
     }
 
     /**
@@ -39,6 +41,24 @@ public class Instance {
      */
     public Location getSpawn() {
         return new Location(world, id * 3000 + 0.5, 120, 0.5);
+    }
+
+    /**
+     * this method just starts a runnable that makes particles around the chest.
+     * the runnable is stoped once mobs spawn
+     */
+    public void startChestParticles() {
+        Location loc = getLootBlock().getLocation();
+        loc.add(0.5, 0.12, 0.5);
+        chestparticlescheduler = Bukkit.getScheduler().scheduleSyncRepeatingTask(RewardInstancePlugin.getInstance(), () -> {
+            angel += 1;
+            if(angel > 360) angel = 0;
+            Bukkit.getOnlinePlayers().stream()
+                    .filter(p -> p.getWorld() == loc.getWorld())
+                    .filter(p -> p.getLocation().distance(loc) < 100)
+                    .forEach(p -> Helper.displayParticleTwirl(p, loc, angel, Color.fromRGB(235, 235, 235)));
+            loc.getWorld().spawnParticle(Particle.END_ROD, getLootBlock().getLocation().add(0.5, 0.5, 0.5), 5);
+        }, 20L, 5L);
     }
 
     /**
@@ -122,6 +142,7 @@ public class Instance {
         mobsSpawned = false;
         hologram.delete();
         Bukkit.getScheduler().cancelTask(schedulerid);
+        startChestParticles();
     }
 
     /**
@@ -135,6 +156,7 @@ public class Instance {
     public void spawnMobs(Player cause) {
         if(!mobsSpawned) {
             mobsSpawned = true;
+            Bukkit.getScheduler().cancelTask(chestparticlescheduler);
             p.sendMessage("§7Kämpfe dich durch die Gegner ohne zu sterben! §cDu hast 4 Minuten Zeit!");
             p.sendTitle("§c⚔", "§7Kämpfe!", 10, 20, 15);
             secondsrunning = 0;
