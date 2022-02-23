@@ -23,7 +23,7 @@ public class GuessSplinterCommand implements CommandExecutor {
                 return false;
             }
 
-            if(Helper.randInt(0, 100) < 27) {
+            if(Helper.randInt(0, 100) < 9) {
                 try {
                     SplinterManager.addSplinter(target);
                     target.sendMessage("§6+ Meteoritensplitter");

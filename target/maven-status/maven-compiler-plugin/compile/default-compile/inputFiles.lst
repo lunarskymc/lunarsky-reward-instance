@@ -1,6 +1,8 @@
 G:\treppi\git\lunarsky-reward-instance\src\main\java\de\lunarsky\rewardinstance\commands\CrystalCommand.java
+G:\treppi\git\lunarsky-reward-instance\src\main\java\de\lunarsky\rewardinstance\events\AttackDamager.java
 G:\treppi\git\lunarsky-reward-instance\src\main\java\de\lunarsky\rewardinstance\splinters\GuessSplinterCommand.java
 G:\treppi\git\lunarsky-reward-instance\src\main\java\de\lunarsky\rewardinstance\Helper.java
+G:\treppi\git\lunarsky-reward-instance\src\main\java\de\lunarsky\rewardinstance\CircularDamageInfo.java
 G:\treppi\git\lunarsky-reward-instance\src\main\java\de\lunarsky\rewardinstance\InstanceLoot.java
 G:\treppi\git\lunarsky-reward-instance\src\main\java\de\lunarsky\rewardinstance\Playerdata.java
 G:\treppi\git\lunarsky-reward-instance\src\main\java\de\lunarsky\rewardinstance\events\InstanceEvents.java

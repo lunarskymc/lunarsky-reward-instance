@@ -200,7 +200,9 @@ public class Instance {
             enemies = new ArrayList<>();
             Bukkit.getScheduler().scheduleSyncDelayedTask(RewardInstancePlugin.getInstance(), () -> {
                 world.createExplosion(getLootBlock().getLocation(), 5, false, false);
-                int mobamount = (int) (stage * 3.2 + Helper.randInt(1, 4));
+                int mobamount = stage + Helper.randInt(1, 4);
+                if(stage == 1) mobamount = 1;
+                if(stage == 2) mobamount = 2;
                 for(int i = 0; i < mobamount; i++) {
                     Bukkit.getScheduler().scheduleSyncDelayedTask(RewardInstancePlugin.getInstance(), () -> {
                         Location loc = randomMobLocation();

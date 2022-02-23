@@ -64,7 +64,7 @@ public class InstanceEvents implements Listener {
             World world = entity.getWorld();
             world.dropItemNaturally(entity.getLocation(), InstanceLoot.getRandomItem());
             world.spawnParticle(Particle.SPELL_WITCH, entity.getLocation(), 3);
-
+            e.setDroppedExp(e.getDroppedExp() * 6);
             double x = e.getEntity().getLocation().getX();
             int id = (int) (x / 3000);
             Instance instance = InstanceManager.getInstanceById(id);
@@ -137,11 +137,8 @@ public class InstanceEvents implements Listener {
 
     @EventHandler
     public void onFish(PlayerFishEvent e) {
-        if(Helper.randInt(0, 1000) < 7) {
-            e.setCancelled(true);
-            e.getPlayer().getWorld().dropItem(e.getPlayer().getLocation(), GiveRewardItemCommand.getKey());
-        }
-        if(Helper.randInt(0, 1000) < 12) {
+        if(Helper.randInt(0, 1000) < 3) {
+            e.getPlayer().sendMessage("§7Du hast einen §6Meteoritensplitter §7geangelt!");
             SplinterManager.addSplinter(e.getPlayer());
         }
     }

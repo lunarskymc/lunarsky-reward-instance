@@ -38,7 +38,16 @@ public class InstanceEnemies {
             mob.setTarget(target);
             return mob;
         }
-        else if(r == 2 && stage > 2) {
+        else if(r == 2 && stage > 3) {
+            Vex mob = (Vex) world.spawnEntity(loc, EntityType.VEX);
+            mob.setMaxHealth(25 + stage * 8 + Helper.randInt(1, 6));
+            mob.setHealth(mob.getMaxHealth());
+            mob.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 1000000, Math.min(1 + (int) (stage / 1.4), 3), true));
+            mob.getEquipment().setHelmet(new ItemStack(Material.CHAINMAIL_HELMET));
+            mob.setTarget(target);
+            return mob;
+        }
+        else if(r == 2) {
             Phantom mob = (Phantom) world.spawnEntity(loc, EntityType.WITHER_SKELETON);
             int size = Helper.randInt(2, 5);
             mob.setMaxHealth(size * 8 + stage);
@@ -49,15 +58,7 @@ public class InstanceEnemies {
             mob.setTarget(target);
             return mob;
         }
-        else if(r == 2) {
-            Vex mob = (Vex) world.spawnEntity(loc, EntityType.VEX);
-            mob.setMaxHealth(25 + stage * 8 + Helper.randInt(1, 6));
-            mob.setHealth(mob.getMaxHealth());
-            mob.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 1000000, 1 + (int) (stage / 1.4), true));
-            mob.getEquipment().setHelmet(new ItemStack(Material.CHAINMAIL_HELMET));
-            mob.setTarget(target);
-            return mob;
-        }
+
         return null;
     }
 }
