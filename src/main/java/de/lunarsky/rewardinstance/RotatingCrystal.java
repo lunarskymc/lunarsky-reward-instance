@@ -2,13 +2,18 @@ package de.lunarsky.rewardinstance;
 
 import de.lunarsky.rewardinstance.core.RewardInstancePlugin;
 import de.lunarsky.rewardinstance.events.UseKeyItem;
+import de.lunarsky.rewardinstance.splinters.SplinterManager;
+import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerInteractEvent;
 
+import java.util.HashMap;
+
 public class RotatingCrystal implements Listener {
+    public static HashMap<Player, Long> timestamp = new HashMap<>();
     static World w;
     static Location loc;
     private static int angel;
@@ -33,9 +38,19 @@ public class RotatingCrystal implements Listener {
             if(!e.getPlayer().getWorld().getName().equalsIgnoreCase("skyworld")) return;
             if(e.getClickedBlock().getLocation().distance(loc) <= 1.1) {
                 Player p = e.getPlayer();
-                p.openInventory(UseKeyItem.getConfirmationInventory(p));
-                Bukkit.getScheduler().scheduleSyncDelayedTask(RewardInstancePlugin.getInstance(), () -> p.playSound(p.getLocation(), Sound.BLOCK_AMETHYST_BLOCK_STEP, 1, 1), 5l);
-                Bukkit.getScheduler().scheduleSyncDelayedTask(RewardInstancePlugin.getInstance(), () -> p.playSound(p.getLocation(), Sound.BLOCK_AMETHYST_BLOCK_STEP, 1, 3), 13l);
+                if(timestamp.getOrDefault(p, 0L) + 3000 < System.currentTimeMillis()) {
+                    if(SplinterManager.isOnCrystalCooldown(p)) {
+                        TextComponent msg = new TextComponent("Es sieht ganz danach aus, als wäre der Amethyst erschöpft... Versuche es später noch ein Mal.");
+                        msg.setColor(net.md_5.bungee.api.ChatColor.of("#d9abd4"));
+                        p.spigot().sendMessage(msg);
+                        p.playSound(p.getLocation(), Sound.BLOCK_AMETHYST_BLOCK_CHIME, 1, 1);
+                        timestamp.put(p, System.currentTimeMillis());
+                        return;
+                    }
+                    p.openInventory(UseKeyItem.getConfirmationInventory(p));
+                    Bukkit.getScheduler().scheduleSyncDelayedTask(RewardInstancePlugin.getInstance(), () -> p.playSound(p.getLocation(), Sound.BLOCK_AMETHYST_BLOCK_STEP, 1, 1), 5l);
+                    Bukkit.getScheduler().scheduleSyncDelayedTask(RewardInstancePlugin.getInstance(), () -> p.playSound(p.getLocation(), Sound.BLOCK_AMETHYST_BLOCK_STEP, 1, 3), 13l);
+                }
             }
         }
     }

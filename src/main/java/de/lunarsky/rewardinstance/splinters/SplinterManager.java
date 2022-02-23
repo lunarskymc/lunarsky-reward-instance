@@ -46,6 +46,18 @@ public class SplinterManager {
     }
 
     /**
+     * returns if the player is still on cooldown.
+     * @param p     plaeyr
+     * @return      true / false
+     */
+    public static boolean isOnCrystalCooldown(Player p) {
+        FileConfiguration data = Playerdata.getPlayerData(p);
+        long timeneeded = 1000 * 60 * 60 * 27;
+        long timestamp = data.contains("crystal-timestamp") ? data.getLong("crystal-timestamp") : 0L;
+        return timestamp + timeneeded > System.currentTimeMillis();
+    }
+
+    /**
      * returns player amount of splinters
      * @param p     player
      * @return      amount

@@ -22,7 +22,6 @@ public class GuessSplinterCommand implements CommandExecutor {
                 sender.sendMessage("§cSpieler nicht gefunden!");
                 return false;
             }
-
             if(Helper.randInt(0, 100) < 9) {
                 try {
                     SplinterManager.addSplinter(target);
@@ -36,8 +35,6 @@ public class GuessSplinterCommand implements CommandExecutor {
             else {
                 target.sendMessage("§7Du hast leider keinen Splitter erhalten. Viel Glück beim nächsten mal :)");
             }
-
-
         }
         return false;
     }

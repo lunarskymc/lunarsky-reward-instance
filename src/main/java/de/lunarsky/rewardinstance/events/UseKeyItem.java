@@ -3,10 +3,13 @@ package de.lunarsky.rewardinstance.events;
 import de.lunarsky.rewardinstance.Helper;
 import de.lunarsky.rewardinstance.Instance;
 import de.lunarsky.rewardinstance.InstanceManager;
+import de.lunarsky.rewardinstance.Playerdata;
 import de.lunarsky.rewardinstance.commands.GiveRewardItemCommand;
 import de.lunarsky.rewardinstance.core.RewardInstancePlugin;
 import de.lunarsky.rewardinstance.splinters.SplinterManager;
+import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.*;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -20,7 +23,6 @@ public class UseKeyItem implements Listener {
     @EventHandler
     public void onClick(PlayerInteractEvent e) {
         if(!e.hasItem()) return;
-
         if(e.getItem().equals(GiveRewardItemCommand.getKey())) {
             Player p = e.getPlayer();
             p.openInventory(getConfirmationInventory(p));
@@ -39,9 +41,14 @@ public class UseKeyItem implements Listener {
                 if(SplinterManager.getAmount(p) >= 2) {
                     Instance instance = InstanceManager.registerNewInstance(p);
                     Bukkit.getScheduler().scheduleSyncDelayedTask(RewardInstancePlugin.getInstance(), () -> {
+                        TextComponent msg = new TextComponent("Du hast die Splitter in den Amethyst eingesetzt!");
+                        msg.setColor(net.md_5.bungee.api.ChatColor.of("#d9abd4"));
                         p.closeInventory();
-                        p.sendMessage("§7Du hast die Splitter in den Amethyst eingesetzt!");
+                        p.spigot().sendMessage(msg);
                         p.getInventory().remove(GiveRewardItemCommand.getKey());
+                        FileConfiguration data = Playerdata.getPlayerData(p);
+                        data.set("crystal-timestamp", System.currentTimeMillis());
+                        Playerdata.savePlayerdata(data, p.getUniqueId().toString());
                         Bukkit.getScheduler().scheduleSyncDelayedTask(RewardInstancePlugin.getInstance(), () -> {
                             p.getWorld().spawnParticle(Particle.EXPLOSION_HUGE, p.getLocation(), 10);
                         }, 15L * 3);
