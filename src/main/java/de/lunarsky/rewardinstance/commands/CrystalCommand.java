@@ -12,7 +12,7 @@ public class CrystalCommand implements CommandExecutor {
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String s, @NotNull String[] args) {
 
         if(sender instanceof Player p) {
-            p.sendMessage("§7Du hast aktuell §6"+ SplinterManager.getAmount(p)+" Meteoritenkristalle§7.");
+            p.sendMessage("§7Du hast aktuell §6"+ SplinterManager.getAmount(p)+" Meteoritensplitter§7.");
             if(SplinterManager.getAmount(p) == 0) {
                 p.sendMessage("§8> §7Meteoritenkristalle kannst du durch Voten, Angeln oder in Kämpfen erhalten.");
             }
