@@ -254,7 +254,7 @@ public class Instance {
 
             int itemamount = (int) (stage * 1.4 + Helper.randInt(1, 5));
             for(int i = 0; i < itemamount; i++) {
-                inv.setItem(Helper.randInt(0, inv.getSize() - 1), InstanceLoot.getRandomItem());
+                inv.setItem(Helper.randInt(0, inv.getSize() - 1), InstanceLoot.getRandomItem(stage));
             }
             p.playSound(p.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1,1);
             chestLoot = false;

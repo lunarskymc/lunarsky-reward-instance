@@ -16,11 +16,16 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class InstanceLoot implements CommandExecutor {
-    private static HashMap<Integer, ArrayList<ItemStack>> stageLoot;
+    private static HashMap<Integer, ArrayList<ItemStack>> stageLoot = new HashMap<>();
+
+    public static void fillLoot() {
+        for(int i = 0; i < 20; i++) {
+            fillLoot(i);
+        }
+    }
 
     public static void fillLoot(int stage) {
         ArrayList<ItemStack> loot = new ArrayList<>();
-
         for(int i = 0; i < Helper.randInt(1, 3); i++) {
             ItemStack pick = new ItemStack(Material.DIAMOND_PICKAXE);
             ItemMeta meta = pick.getItemMeta();
