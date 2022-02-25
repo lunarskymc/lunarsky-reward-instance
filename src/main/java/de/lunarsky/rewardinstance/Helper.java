@@ -9,6 +9,8 @@ import com.sk89q.worldedit.function.operation.Operation;
 import com.sk89q.worldedit.function.operation.Operations;
 import com.sk89q.worldedit.math.BlockVector3;
 import com.sk89q.worldedit.session.ClipboardHolder;
+import net.md_5.bungee.api.ChatColor;
+import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -22,11 +24,35 @@ import java.util.Locale;
 import java.util.Random;
 
 public class Helper {
+
+    /**
+     * creatas a text component with custom color
+     * @param msg       text
+     * @param color     color in hex
+     * @return          textcomponent colored
+     */
+    public static TextComponent c(String msg, String color) {
+        TextComponent text = new TextComponent(msg);
+        text.setColor(ChatColor.of(color));
+        return text;
+    }
+
+    /**
+     * adds two text components and returns both combined (helper method)
+     * @param a     TextComponent 1
+     * @param b     TextComponent 2
+     * @return      result
+     */
+    public static TextComponent c(TextComponent a, TextComponent b) {
+        a.addExtra(b);
+        return a;
+    }
+
     /**
      * Helper Method to faster create Items with displayname/lore in a single line
-     * @param material
-     * @param name
-     * @param lore
+     * @param material  type
+     * @param name      displayname
+     * @param lore      lore lines
      * @return the ItemStack
      */
     public static ItemStack createSimpleIcon(Material material, String name, String[] lore) {
