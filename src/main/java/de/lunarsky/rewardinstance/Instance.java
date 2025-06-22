@@ -218,9 +218,10 @@ public class Instance {
                         .filter(e -> !e.isDead())
                         .filter(e -> (!(e instanceof Vex) && e.getLocation().getY() < 120) || e.getLocation().distance(getLootBlock().getLocation()) > 25)
                         .forEach(e -> {
-                            enemies.remove(e);
                             e.remove();
                         });
+                enemies.removeIf((e) ->!e.isDead() && ((!(e instanceof Vex) && e.getLocation().getY() < 120) || e.getLocation().distance(getLootBlock().getLocation()) > 25));
+
                 /* //todo: make those working
                 if(secondsrunning == 5) circularDamageAttack(new Location(world, id * 3000 + 2, 120, id * 3000 - 2), 4, 20);
                 if(secondsrunning == 5 && stage > 1) circularDamageAttack(new Location(world, id * 3000 - 7, 120, id * 3000 + 6), 4, 60);
