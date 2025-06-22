@@ -68,7 +68,7 @@ public class InstanceEvents implements Listener {
             if(instance != null) {
                 instance.getP().sendMessage("§7"+instance.getRemainingEnemiesCount() + " von " + instance.getEnemiesCount() + " Gegnern verbleibend.");
                 world.dropItemNaturally(entity.getLocation(), InstanceLoot.getRandomItem(instance.getStage()));
-                world.spawnParticle(Particle.SPELL_WITCH, entity.getLocation(), 3);
+                world.spawnParticle(Particle.ELECTRIC_SPARK, entity.getLocation(), 3);
                 e.setDroppedExp(e.getDroppedExp() * (1 + instance.getStage() / 2));
             }
         }

@@ -52,6 +52,6 @@ public class InstanceManager {
      * removes all holograms from all instances (used on server stop)
      */
     public static void removeHolograms() {
-        instances.forEach(i -> i.getHologram().delete());
+        //todo: instances.forEach(i -> i.getHologram().delete());
     }
 }

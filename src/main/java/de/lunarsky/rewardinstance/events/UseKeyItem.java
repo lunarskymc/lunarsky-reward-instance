@@ -50,12 +50,12 @@ public class UseKeyItem implements Listener {
                         data.set("crystal-timestamp", System.currentTimeMillis());
                         Playerdata.savePlayerdata(data, p.getUniqueId().toString());
                         Bukkit.getScheduler().scheduleSyncDelayedTask(RewardInstancePlugin.getInstance(), () -> {
-                            p.getWorld().spawnParticle(Particle.EXPLOSION_HUGE, p.getLocation(), 10);
+                            p.getWorld().spawnParticle(Particle.EXPLOSION, p.getLocation(), 10);
                         }, 15L * 3);
                         Bukkit.getScheduler().scheduleSyncDelayedTask(RewardInstancePlugin.getInstance(), () -> {
                             p.teleport(instance.getSpawn());
                             p.playSound(p.getLocation(), Sound.ENTITY_ENDERMAN_TELEPORT, 1, 1);
-                            p.getWorld().spawnParticle(Particle.EXPLOSION_HUGE, p.getLocation(), 10);
+                            p.getWorld().spawnParticle(Particle.EXPLOSION, p.getLocation(), 10);
                             SplinterManager.clear(p);
                         }, 20L * 3);
 

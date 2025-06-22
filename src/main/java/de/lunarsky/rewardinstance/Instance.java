@@ -1,9 +1,9 @@
 package de.lunarsky.rewardinstance;
 
-import com.gmail.filoghost.holographicdisplays.api.Hologram;
-import com.gmail.filoghost.holographicdisplays.api.HologramsAPI;
+import eu.decentsoftware.holograms.api.holograms.Hologram;
 import de.lunarsky.rewardinstance.core.RewardInstancePlugin;
 import de.lunarsky.rewardinstance.events.AttackDamager;
+import eu.decentsoftware.holograms.api.DHAPI;
 import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Entity;
@@ -16,6 +16,7 @@ import org.bukkit.potion.PotionEffectType;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -113,18 +114,17 @@ public class Instance {
         p.sendMessage("§7Du hast alle Gegner besiegt. Es ist ein Hologramm mit Anweisungen erschienen.");
         new Thread(() -> Helper.pasteSchematic(getSpawn(), portalSchem, false)).start();
 
-        hologram = HologramsAPI.createHologram(RewardInstancePlugin.getInstance(), hologramLocation());
-        hologram.setAllowPlaceholders(true);
-        hologram.appendItemLine(new ItemStack(Material.LIGHT));
-        hologram.appendTextLine("§bHerzlichen Glückwunsch!");
-        hologram.appendTextLine("§7Du hast alle Gegner besiegt.");
-        hologram.appendTextLine("§7Wähle nun eines der Portale,");
-        hologram.appendTextLine("§7um in den nächsten Raum zu");
-        hologram.appendTextLine("§7gelangen.");
-        hologram.appendTextLine("§cABER VORSICHT!");
-        hologram.appendTextLine("§7Wählst du das falsche Portal,");
-        hologram.appendTextLine("§7ist alles vorbei und du wirst");
-        hologram.appendTextLine("§7zurück zum Spawn teleportiert.");
+        hologram = DHAPI.createHologram("instance_" + UUID.randomUUID().toString(), hologramLocation());
+        DHAPI.addHologramLine(hologram,  new ItemStack(Material.LIGHT));
+        DHAPI.addHologramLine(hologram, "§bHerzlichen Glückwunsch!");
+        DHAPI.addHologramLine(hologram, "§7Du hast alle Gegner besiegt.");
+        DHAPI.addHologramLine(hologram, "§7Wähle nun eines der Portale,");
+        DHAPI.addHologramLine(hologram, "§7um in den nächsten Raum zu");
+        DHAPI.addHologramLine(hologram, "§7gelangen.");
+        DHAPI.addHologramLine(hologram, "§cABER VORSICHT!");
+        DHAPI.addHologramLine(hologram, "§7Wählst du das falsche Portal,");
+        DHAPI.addHologramLine(hologram, "§7ist alles vorbei und du wirst");
+        DHAPI.addHologramLine(hologram, "§7zurück zum Spawn teleportiert.");
 
         Bukkit.getScheduler().cancelTask(schedulerid);
         portalsReady = true;
@@ -143,9 +143,9 @@ public class Instance {
         stage++;
         p.teleport(getSpawn());
         p.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 10, 3, true));
-        p.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 10, 3, true));
+        p.addPotionEffect(new PotionEffect(PotionEffectType.SLOWNESS, 10, 3, true));
         p.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 10, 10, true));
-        p.spawnParticle(Particle.EXPLOSION_LARGE, p.getLocation(), 5);
+        p.spawnParticle(Particle.EXPLOSION, p.getLocation(), 5);
         p.playSound(p.getLocation(), Sound.ENTITY_ENDERMAN_TELEPORT, 1, 0);
         p.sendMessage("§7Du hast den nächsten Raum betreten.");
         chestLoot = true;
@@ -169,7 +169,7 @@ public class Instance {
             new Thread(() -> {
                 locations.forEach(particleLocation -> {
                     Color color = Color.fromRGB(191, 46, 46);
-                    p.spawnParticle(Particle.REDSTONE, particleLocation, 0, new Particle.DustOptions(color, 3f));
+                    p.spawnParticle(Particle.FLAME, particleLocation, 0, new Particle.DustOptions(color, 3f));
                 });
             }).start();
         }, 5L, 5L);

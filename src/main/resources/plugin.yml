@@ -2,8 +2,8 @@ name: LunarskyInstance
 version: 1.0
 main: de.lunarsky.rewardinstance.core.RewardInstancePlugin
 
-api-version: 1.18
-depends: [Multiverse-Core, FastAsyncWorldEdit, VoidGen, HolographicDisplays]
+api-version: 1.21
+depends: [Multiverse-Core, FastAsyncWorldEdit, VoidGen]
 softdepend: [PlaceholderAPI]
 author: treppi / plscomeback
 

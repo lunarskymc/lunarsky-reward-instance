@@ -52,7 +52,7 @@ public class SplinterManager {
      */
     public static boolean isOnCrystalCooldown(Player p) {
         FileConfiguration data = Playerdata.getPlayerData(p);
-        long timeneeded = 1000 * 60 * 60 * 27;
+        long timeneeded = 1000 * 60 * 60 * 13;
         long timestamp = data.contains("crystal-timestamp") ? data.getLong("crystal-timestamp") : 0L;
         return timestamp + timeneeded > System.currentTimeMillis();
     }

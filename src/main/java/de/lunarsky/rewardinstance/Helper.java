@@ -98,7 +98,7 @@ public class Helper {
     public static void displayParticleTwirl(Player p, Location loc, double angel, Color color) {
         Location[] points = Helper.getPointsOnCircle(loc, 1, 20, angel);
         for (Location pointlocation : points) {
-            p.spawnParticle(Particle.REDSTONE, pointlocation, 0, new Particle.DustOptions(color, 1f));
+            p.spawnParticle(Particle.DUST, pointlocation, 0, new Particle.DustOptions(color, 1f));
         }
     }
 

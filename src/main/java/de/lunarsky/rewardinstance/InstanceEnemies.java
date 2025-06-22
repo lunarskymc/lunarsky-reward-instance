@@ -33,7 +33,7 @@ public class InstanceEnemies {
             mob.setMaxHealth(50 + stage * 8 + Helper.randInt(1, 6));
             mob.setHealth(mob.getMaxHealth());
             mob.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 1000000, 1, false));
-            mob.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 1000000, 1 + (int) (stage / 1.4), true));
+            mob.addPotionEffect(new PotionEffect(PotionEffectType.STRENGTH, 1000000, 1 + (int) (stage / 1.4), true));
             mob.getEquipment().setHelmet(new ItemStack(Material.CHAINMAIL_HELMET));
             mob.setTarget(target);
             return mob;

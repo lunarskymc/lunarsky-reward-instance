@@ -28,7 +28,7 @@ public class AttackDamager implements Listener {
                     .forEach(p -> {
                         for(CircularDamageInfo info : infos) {
                             if(p.getLocation().distance(info.getLoc()) < info.getSize()) {
-                                p.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 10, 2, false));
+                                p.addPotionEffect(new PotionEffect(PotionEffectType.SLOWNESS, 10, 2, false));
                                 p.setHealth(Math.max(0, p.getHealth() - 2.5));
                             }
                         }

@@ -29,44 +29,44 @@ public class InstanceLoot implements CommandExecutor {
         for(int i = 0; i < Helper.randInt(1, 3); i++) {
             ItemStack pick = new ItemStack(Material.DIAMOND_PICKAXE);
             ItemMeta meta = pick.getItemMeta();
-            pick.addUnsafeEnchantment(Enchantment.DURABILITY, Helper.randInt(1, stage < 5 ? 3 : 4));
-            pick.addUnsafeEnchantment(Enchantment.LOOT_BONUS_BLOCKS, Helper.randInt(1, stage < 3 ? 1 : 3));
-            pick.addUnsafeEnchantment(Enchantment.DIG_SPEED, Helper.randInt(1, stage < 7 ? 5 : 6));
+            pick.addUnsafeEnchantment(Enchantment.UNBREAKING, Helper.randInt(1, stage < 5 ? 3 : 4));
+            pick.addUnsafeEnchantment(Enchantment.FORTUNE, Helper.randInt(1, stage < 3 ? 1 : 3));
+            pick.addUnsafeEnchantment(Enchantment.EFFICIENCY, Helper.randInt(2, stage < 7 ? 5 : 6));
             if(Helper.randInt(0, 100) <= (stage > 6 ? 10 : 20) && stage >= 6) pick.addUnsafeEnchantment(Enchantment.MENDING, 1);
             loot.add(pick);
         }
         for(int i = 0; i < Helper.randInt(2, 5); i++) {
             ItemStack pick = new ItemStack(Material.IRON_PICKAXE);
             ItemMeta meta = pick.getItemMeta();
-            pick.addUnsafeEnchantment(Enchantment.DURABILITY, Helper.randInt(1, stage < 6 ? 3 : 4));
-            pick.addUnsafeEnchantment(Enchantment.LOOT_BONUS_BLOCKS, Helper.randInt(1, stage < 3 ? 1 : 3));
-            pick.addUnsafeEnchantment(Enchantment.DIG_SPEED, Helper.randInt(1, stage < 4 ? 5 : 6));
+            pick.addUnsafeEnchantment(Enchantment.UNBREAKING, Helper.randInt(1, stage < 6 ? 3 : 4));
+            pick.addUnsafeEnchantment(Enchantment.FORTUNE, Helper.randInt(1, stage < 3 ? 1 : 3));
+            pick.addUnsafeEnchantment(Enchantment.EFFICIENCY, Helper.randInt(2, stage < 4 ? 5 : 6));
             if(Helper.randInt(0, 100) <= (stage > 6 ? 10 : 20) && stage >= 5) pick.addUnsafeEnchantment(Enchantment.MENDING, 1);
             loot.add(pick);
         }
         for(int i = 0; i < Helper.randInt(2, 5); i++) {
             ItemStack axe = new ItemStack(Material.IRON_AXE);
             ItemMeta meta = axe.getItemMeta();
-            axe.addUnsafeEnchantment(Enchantment.DURABILITY, Helper.randInt(2, stage < 6 ? 3 : 4));
-            if(Helper.randInt(0, 10) <= 2) axe.addUnsafeEnchantment(Enchantment.LOOT_BONUS_BLOCKS, Helper.randInt(1, stage < 3 ? 2 : 3));
-            axe.addUnsafeEnchantment(Enchantment.DIG_SPEED, Helper.randInt(4, stage > 4 ? 6 : (stage >= 3 ? 5 : 3)));
+            axe.addUnsafeEnchantment(Enchantment.UNBREAKING, Helper.randInt(2, stage < 6 ? 3 : 4));
+            if(Helper.randInt(0, 10) <= 2) axe.addUnsafeEnchantment(Enchantment.FORTUNE, Helper.randInt(1, stage < 3 ? 2 : 3));
+            axe.addUnsafeEnchantment(Enchantment.EFFICIENCY, Helper.randInt(2, stage > 4 ? 6 : (stage >= 3 ? 5 : 3)));
             if(Helper.randInt(0, 10) <= 1) axe.addUnsafeEnchantment(Enchantment.MENDING, 1);
             loot.add(axe);
         }
         for(int i = 0; i < Helper.randInt(2, 3); i++) {
             ItemStack axe = new ItemStack(Material.DIAMOND_AXE);
             ItemMeta meta = axe.getItemMeta();
-            if(Helper.randInt(0, 30) <= (stage > 5 ? 4 : 6)) axe.addUnsafeEnchantment(Enchantment.DURABILITY, Helper.randInt(1, stage > 6 ? 4 : 3));
-            if(stage > 4 || Helper.randInt(0, 10) <= 3) axe.addUnsafeEnchantment(Enchantment.LOOT_BONUS_BLOCKS, Helper.randInt(1, stage > 5 ? 3 : 2));
-            axe.addUnsafeEnchantment(Enchantment.DIG_SPEED, Helper.randInt(1, stage < 7 ? 6 : 5));
+            if(Helper.randInt(0, 30) <= (stage > 5 ? 4 : 6)) axe.addUnsafeEnchantment(Enchantment.UNBREAKING, Helper.randInt(1, stage > 6 ? 4 : 3));
+            if(stage > 4 || Helper.randInt(0, 10) <= 3) axe.addUnsafeEnchantment(Enchantment.FORTUNE, Helper.randInt(1, stage > 5 ? 3 : 2));
+            axe.addUnsafeEnchantment(Enchantment.EFFICIENCY, Helper.randInt(1, stage < 7 ? 6 : 5));
             if(Helper.randInt(0, 43) <= 2) axe.addUnsafeEnchantment(Enchantment.MENDING, 1);
             loot.add(axe);
         }
         for(int i = 0; i < Helper.randInt(4, 6); i++) {
-            loot.add(new ItemStack(Material.NETHERITE_SCRAP, Helper.randInt(1, Math.min(stage, 4))));
+            loot.add(new ItemStack(Material.NETHERITE_SCRAP, Helper.randInt(1, Math.min(Math.max(stage, 1), 4))));
         }
         for(int i = 0; i < Helper.randInt(3, stage < 5 ? 5 : 7); i++) {
-            loot.add(new ItemStack(Material.PHANTOM_MEMBRANE, Helper.randInt(4, stage * 2)));
+            loot.add(new ItemStack(Material.PHANTOM_MEMBRANE, Helper.randInt(4, Math.max(4, stage * 2))));
             loot.add(new ItemStack(Material.DIAMOND, Helper.randInt(4, 16)));
             loot.add(new ItemStack(Material.GOLD_INGOT, Helper.randInt(4, 20)));
             loot.add(new ItemStack(Material.EMERALD, Helper.randInt(4, 9)));
@@ -77,19 +77,19 @@ public class InstanceLoot implements CommandExecutor {
         for(int i = 0; i < Helper.randInt(2, 3); i++) {
             ItemStack book = new ItemStack(Material.ENCHANTED_BOOK);
             EnchantmentStorageMeta meta = (EnchantmentStorageMeta) book.getItemMeta();
-            meta.addStoredEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, Helper.randInt(1, stage > 5 ? 5 : stage > 3 ? 4 : 3), true);
+            meta.addStoredEnchant(Enchantment.PROTECTION, Helper.randInt(1, stage > 5 ? 5 : stage > 3 ? 4 : 3), true);
             book.setItemMeta(meta);
             loot.add(book);
 
             book = new ItemStack(Material.ENCHANTED_BOOK);
             meta = (EnchantmentStorageMeta) book.getItemMeta();
-            meta.addStoredEnchant(Enchantment.DAMAGE_ALL, Helper.randInt(2, Helper.randInt(1, stage > 7 ? 5 : stage > 2 ? 4 : 3)), true);
+            meta.addStoredEnchant(Enchantment.SHARPNESS, Helper.randInt(2, stage > 7 ? 5 : stage > 2 ? 4 : 3), true);
             book.setItemMeta(meta);
             loot.add(book);
 
             book = new ItemStack(Material.ENCHANTED_BOOK);
             meta = (EnchantmentStorageMeta) book.getItemMeta();
-            meta.addStoredEnchant(Enchantment.DIG_SPEED, Helper.randInt(3, stage > 7 ? 6 : 5), true);
+            meta.addStoredEnchant(Enchantment.EFFICIENCY, Helper.randInt(3, stage > 7 ? 6 : 5), true);
             book.setItemMeta(meta);
             loot.add(book);
 
@@ -156,7 +156,7 @@ public class InstanceLoot implements CommandExecutor {
         ItemMeta meta = item.getItemMeta();
         meta.setDisplayName("§b§lFederfly");
         meta.setLore(getFederflyLore(max_uses, max_uses));
-        meta.addEnchant(Enchantment.DURABILITY, 1, false);
+        meta.addEnchant(Enchantment.UNBREAKING, 1, false);
         item.setItemMeta(meta);
 
         return item;
